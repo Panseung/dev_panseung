@@ -1,0 +1,39 @@
+'use client'
+import Link from 'next/link'
+import styles from './page.module.scss'
+import { usePathname } from 'next/navigation'
+import classNames from 'classnames'
+
+export default function Navbar() {
+  
+  const cn = classNames.bind(styles)
+  const router = usePathname()
+
+  return (
+    <div className={styles['navbar-wrapper']}>
+      <div className={styles['navbar-left']}>
+        <Link href="/" className={cn(styles['link'], (router === '/' ? styles['active'] : ''))}>
+          <span className={styles['main-color-1']}>dev </span>
+          <span className={styles['main-color-2']}>Panseung</span>
+        </Link>
+      </div>
+      <div className={styles['navbar-right']}>
+        <Link 
+          href="/timeArchive" 
+          className={cn(styles['link'], (router === '/timeArchive' ? styles['active'] : ''))}>
+          time archive
+        </Link>
+        <Link 
+          href="/devWriting" 
+          className={cn(styles['link'], (router === '/devWriting' ? styles['active'] : ''))}>
+          dev writing
+        </Link>
+        <Link 
+          href="/algoStudy" 
+          className={cn(styles['link'], (router === '/algoStudy' ? styles['active'] : ''))}>
+          algo study
+        </Link>
+      </div>
+    </div>
+  )
+}

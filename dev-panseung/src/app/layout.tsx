@@ -1,4 +1,6 @@
-import styles from './layout.module.css'
+import styles from './layout.module.scss'
+
+import Navbar from '@/components/Navbar/page'
 
 export default function RootLayout({
   children,
@@ -7,7 +9,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={styles['layout']}>{children}</body>
+      <body className={styles['layout']}>
+        <Navbar></Navbar>
+        {children}
+      </body>
     </html>
   )
 }
