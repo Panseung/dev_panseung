@@ -1,0 +1,30 @@
+.footer-wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  margin-top: 100px;
+  padding: 20px 0;
+  border-top: 2px solid #00ffff;
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-right {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 15px;
+
+    .email {
+      cursor: pointer;
+    }
+
+    .github-img {
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
