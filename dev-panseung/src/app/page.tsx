@@ -5,10 +5,10 @@ export default function Home() {
     <div className={styles['main-wrapper']}>
       <div className={styles['main-header']}>
         <div className={styles['header-title']}>
-          Hi, I'm seunghwan Kim🖐️
+          Hi, I{"'"}m seunghwan Kim🖐️
         </div> 
         <div className={styles['header-content']}>
-          I'm a Junior Front-end Engineer.
+          I{"'"}m a Junior Front-end Engineer.
         </div>
         <div className={styles['header-content']}>
         I worked for 6 months at a POS service company with Vue2,
@@ -47,7 +47,7 @@ export default function Home() {
           </div>
           <div className={styles['content-item']}>
             <div className={styles['item-title']}>
-              Let's on Clound
+              Let{"'"}s on Clound
             </div>
             <div className={styles['item-content']}>
               Smallbee Project Front Engineer (Vue2) | 2022.11 ~ 2023.4
