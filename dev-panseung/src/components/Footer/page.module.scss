@@ -7,24 +7,45 @@
   border-top: 2px solid #00ffff;
 
   .footer-left {
-    display: flex;
-    align-items: center;
   }
 
   .footer-right {
     display: flex;
     justify-content: right;
-    align-items: center;
     gap: 15px;
 
     .email {
+      position: relative;
       cursor: pointer;
+
+      &:hover {
+        font-size: 18px;
+      }
+
+      .copy-text {
+        position: absolute;
+        border-radius: 5px;
+        right: 20px;
+        bottom: 30px;
+        font-size: 12px;
+        background-color: rgb(255, 239, 187);
+        display: none;
+
+        &.show {
+          display: block;
+        }
+      }
     }
 
     .github-img {
       cursor: pointer;
       width: 25px;
       height: 25px;
+
+      &:hover {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 }
