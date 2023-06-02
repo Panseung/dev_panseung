@@ -1,0 +1,25 @@
+.main-wrapper {
+  display: grid;
+  grid-template-rows: 300px 1fr;
+
+
+  .main-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      font-size: 36px;
+      font-weight: bold;
+    }
+  
+    .header-content {
+      font-size: 18px;
+      color: #808080;
+    }
+  }
+
+}
