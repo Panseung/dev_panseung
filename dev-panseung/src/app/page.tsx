@@ -1,8 +1,12 @@
+import Head from 'next/head'
 import styles from './page.module.scss'
 
 export default function Home() {
   return (
     <div className={styles['main-wrapper']}>
+      <Head>
+        <title>hihi</title>
+      </Head>
       <div className={styles['main-header']}>
         <div className={styles['header-title']}>
           Hi, I{"'"}m seunghwan Kim🖐️
