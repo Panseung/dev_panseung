@@ -3,8 +3,9 @@ import Link from 'next/link'
 import styles from './page.module.scss'
 import { usePathname } from 'next/navigation'
 import classNames from 'classnames'
+import { signIn, signOut } from 'next-auth/react'
 
-export default function Navbar() {
+export default function Navbar(  { isLogin } : { isLogin :Boolean }  ) {
   
   const cn = classNames.bind(styles)
   const router = usePathname()
@@ -33,6 +34,7 @@ export default function Navbar() {
           className={cn(styles['link'], (router === '/algoStudy' ? styles['active'] : ''))}>
           algo study
         </Link>
+        <div onClick={ () => { isLogin ? signOut() : signIn() } }>{ isLogin ? 'logOut' : 'logIn' }</div>
       </div>
     </div>
   )
