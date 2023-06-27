@@ -4,11 +4,15 @@ import styles from './page.module.scss'
 import { usePathname } from 'next/navigation'
 import classNames from 'classnames'
 import { signIn, signOut } from 'next-auth/react'
+import { useSelector } from 'react-redux'
+import _ from 'lodash'
 
-export default function Navbar(  { isLogin } : { isLogin :Boolean }  ) {
+export default function Navbar() {
   
   const cn = classNames.bind(styles)
   const router = usePathname()
+  
+  let isLogin = useSelector((state :object) => {return _.get(state, 'isLogin') })
 
   return (
     <div className={styles['navbar-wrapper']}>
@@ -34,7 +38,9 @@ export default function Navbar(  { isLogin } : { isLogin :Boolean }  ) {
           className={cn(styles['link'], (router === '/algoStudy' ? styles['active'] : ''))}>
           algo study
         </Link>
-        <div onClick={ () => { isLogin ? signOut() : signIn() } }>{ isLogin ? 'logOut' : 'logIn' }</div>
+        <div onClick={ () => { isLogin ? signOut() : signIn() } }>
+          { isLogin ? 'logOut' : 'logIn' }
+        </div>
       </div>
     </div>
   )

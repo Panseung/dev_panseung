@@ -1,10 +1,12 @@
 import styles from './layout.module.scss'
+import _ from 'lodash'
 
 import Navbar from '@/components/Navbar/page'
 import Footer from '@/components/Footer/page'
-import Head from 'next/head'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/pages/api/auth/[...nextauth]'
+import ReduxProvider from '../util/reduxProviders'
+
+import AuthJudge from '@/util/authJudge/page'
+import SessionProviders from '@/util/sessionProviders'
 
 export const metadata = {
   title: 'dev Panseung',
@@ -12,23 +14,20 @@ export const metadata = {
 }
 
 export default async function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {
-  let session :Object | null = await getServerSession( authOptions )
-  let isLogin :Boolean = session ? true : false
-
   return (
-    <html lang="en">
-      <Head>
-        <title>hi</title>
-        <meta property='custom' content='123123'></meta>
-      </Head>
-      
+    <html lang="en">      
       <body className={styles['layout']}>
-        <Navbar isLogin = { isLogin } ></Navbar>
-        {children}
+        <ReduxProvider>          
+          <SessionProviders>
+            <AuthJudge></AuthJudge>
+          </SessionProviders>
+          <Navbar></Navbar>
+            {children}
+        </ReduxProvider>
         <Footer></Footer>
       </body>
     </html>
