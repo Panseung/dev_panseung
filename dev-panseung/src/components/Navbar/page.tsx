@@ -12,7 +12,7 @@ export default function Navbar() {
   const cn = classNames.bind(styles)
   const router = usePathname()
   
-  let isLogin = useSelector((state :object) => {return _.get(state, 'isLogin') })
+  let isLogin :boolean = useSelector((state :object) => {return _.get(state, 'isLogin') || false })
 
   return (
     <div className={styles['navbar-wrapper']}>
