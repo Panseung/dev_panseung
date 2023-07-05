@@ -7,7 +7,6 @@ import ReduxProvider from '../util/reduxProviders'
 
 import AuthJudge from '@/util/authJudge/page'
 import SessionProviders from '@/util/sessionProviders'
-require("dotenv").config()
 
 export const metadata = {
   title: 'dev Panseung',
