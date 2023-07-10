@@ -1,21 +1,29 @@
 'use client'
-import styles from './page.module.scss'
 
+import { useEffect, useState } from 'react'
+import styles from './page.module.scss'
 export default function DevWriting() {
 
-  function test() {
-    fetch('database-dev-panseung.ceykodjlbme3.ap-northeast-2.rds.amazonaws.com')
-    .then(res => res.json)
-    .then(data => console.log(data))
-  }
+  const [data, setData] = useState([])
 
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  async function fetchData() {
+    try {
+      const response = await fetch('/api/test');
+      const result = await response.json();
+      console.log(result)
+      setData(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className={styles['dev-writing-wrapper']}>
       여기는 데브라이팅
-      <button onClick={test}>
-        test
-      </button>
     </div>
   )
 }
