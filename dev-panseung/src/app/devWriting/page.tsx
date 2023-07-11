@@ -1,16 +1,21 @@
 'use client'
 
-
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import _ from 'lodash'
 import styles from './page.module.scss'
 import moment from 'moment'
 
 export default function DevWriting() {
 
+  let isManager :boolean = useSelector((state :object) => _.get(state, 'isManager') || false )
+
+  console.log( '매니저: ', isManager)
+
   const [data, setData] = useState([])
 
   useEffect(() => {
-    fetchData()
+    // fetchData()
   }, [])
 
   async function fetchData() {
@@ -42,6 +47,11 @@ export default function DevWriting() {
         <div className={styles['content']}>
           I mainly write about development learning
         </div> 
+        <div>
+          {isManager && (
+            <button>글 작성</button>
+          )}
+        </div>
       </div>
       <div className={styles['writing-box']}>
         { datas.map( function( data, i ) {
