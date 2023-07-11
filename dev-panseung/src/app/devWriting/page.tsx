@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import Link from 'next/link'
 import _ from 'lodash'
 import styles from './page.module.scss'
 import moment from 'moment'
@@ -49,7 +50,7 @@ export default function DevWriting() {
         </div> 
         <div>
           {isManager && (
-            <button>글 작성</button>
+            <Link href="/devWriting/write" > 글 작성 </Link>
           )}
         </div>
       </div>
