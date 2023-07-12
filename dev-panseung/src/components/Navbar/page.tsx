@@ -17,7 +17,10 @@ export default function Navbar() {
   return (
     <div className={styles['navbar-wrapper']}>
       <div className={styles['navbar-left']}>
-        <Link href="/" className={cn(styles['link'], (router === '/' ? styles['active'] : ''))}>
+        <Link 
+          href="/" 
+          prefetch={false}
+          className={cn(styles['link'], (router === '/' ? styles['active'] : ''))}>
           <span className={styles['main-color-1']}>dev </span>
           <span className={styles['main-color-2']}>Panseung</span>
         </Link>
@@ -25,16 +28,19 @@ export default function Navbar() {
       <div className={styles['navbar-right']}>
         <Link 
           href="/timeArchive" 
+          prefetch={false}
           className={cn(styles['link'], (router === '/timeArchive' ? styles['active'] : ''))}>
           time archive
         </Link>
         <Link 
           href="/devWriting" 
+          prefetch={false}
           className={cn(styles['link'], (router === '/devWriting' ? styles['active'] : ''))}>
           dev writing
         </Link>
         <Link 
           href="/algoStudy" 
+          prefetch={false}
           className={cn(styles['link'], (router === '/algoStudy' ? styles['active'] : ''))}>
           algo study
         </Link>

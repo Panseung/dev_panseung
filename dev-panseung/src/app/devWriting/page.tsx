@@ -5,39 +5,26 @@ import { useSelector } from 'react-redux'
 import Link from 'next/link'
 import _ from 'lodash'
 import styles from './page.module.scss'
-import moment from 'moment'
 
 export default function DevWriting() {
 
   let isManager :boolean = useSelector((state :object) => _.get(state, 'isManager') || false )
 
-  console.log( '매니저: ', isManager)
-
-  const [data, setData] = useState([])
+  const [datas, setDatas] = useState([])
 
   useEffect(() => {
-    // fetchData()
+    fetchData()
   }, [])
 
-  async function fetchData() {
+  const fetchData = async function() {
     try {
-      const response = await fetch('/api/test');
-      const result = await response.json();
-      console.log(result)
-      setData(result);
+      const response = await fetch('/api/devWriting/getWritings')
+      const result = await response.json()
+      setDatas(result)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
-  
-  const datas = [
-    { title: '테스트 타이틀 1',
-      content: '테스트 내용 1',
-      time: moment().calendar() }, 
-    { title: '테스트 타이틀 2',
-      content: '테스트 내용 2',
-      time: moment().format("MMM Do YY") }, 
-  ]
 
   return (
     <div className={styles['dev-writing-wrapper']}>
@@ -55,12 +42,15 @@ export default function DevWriting() {
         </div>
       </div>
       <div className={styles['writing-box']}>
-        { datas.map( function( data, i ) {
+        { datas.length > 0 && datas.map( function( data, i ) {  // 추후에 로대시 사용해서 변경
           return (
           <div className={styles['writing-item']} key={i}>
-            <div className={styles['item-title']}>{ data.title }</div>
-            <div className={styles['item-content']}>{ data.content }</div>
-            <div className={styles['item-time']}>{ data.time }</div>
+            <div className={styles['item-title']}>{ _.get(data, 'id') }</div>
+            <div className={styles['item-title']}>{ _.get(data, 'writer') }</div>
+            <div className={styles['item-title']}>{ _.get(data, 'title') }</div>
+            <div className={styles['item-content']}>{ _.get(data, 'content') }</div>
+            <div className={styles['item-time']}>{ _.get(data, 'created_time') }</div>
+            <div className={styles['item-time']}>{ _.get(data, 'modified_time') }</div>
           </div>
           )
         } ) }

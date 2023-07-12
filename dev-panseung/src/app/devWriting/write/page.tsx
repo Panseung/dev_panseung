@@ -1,31 +1,41 @@
 'use client'
 
 import React, { useState, ChangeEvent, FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './page.module.scss'
 
 export default function WritePage() {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
 
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = async function(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value)
   }
 
-  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = async function(event: ChangeEvent<HTMLTextAreaElement>) {
     setContent(event.target.value)
   }
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  
+  const router = useRouter()
+  const handleSubmit = async function(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    // 글 작성 처리 로직
-    console.log('제목:', title)
-    console.log('내용:', content)
+    try {
+      await fetch('/api/devWriting/write', {
+        method: 'POST',
+        body: JSON.stringify({ title, content }),
+      })
+    router.push('/devWriting')
+
+
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
     <div className={styles['writePage']}>
       <div className={styles['title']}>글 작성</div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="POST">
         <div className={styles['formGroup']}>
           <label htmlFor="title">제목</label>
           <input type="text" id="title" value={title} onChange={handleTitleChange} />
