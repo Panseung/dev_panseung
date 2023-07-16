@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       // 쿼리문 실행
       const id = _.get(body, 'id')
       const query = `
-        UPDATE \`dev-Panseung\`.dev_writing SET isDeleted = 1 WHERE id = ?
+        UPDATE \`dev-Panseung\`.dev_writing SET is_deleted = 1 WHERE id = ?
       `
       dbConnection.execute(query, [id])
       // 응답
