@@ -1,10 +1,22 @@
 'use client'
 
-import React, { useState, ChangeEvent, FormEvent } from 'react'
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './page.module.scss'
+import { useSelector } from 'react-redux'
+import _ from 'lodash'
 
 export default function WritePage() {
+  const isManager :boolean = useSelector((state :object) => _.get(state, 'isManager') || false )
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isManager) {
+      alert('관리자만 작성할 수 있습니다.')
+      router.push('/devWriting')
+    }
+  }, [])
+
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
 
@@ -16,13 +28,12 @@ export default function WritePage() {
     setContent(event.target.value)
   }
   
-  const router = useRouter()
   const handleSubmit = async function(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     try {
       await fetch('/api/devWriting/write', {
         method: 'POST',
-        body: JSON.stringify({ title, content }),
+        body: JSON.stringify({ title, content, isManager }),
       })
     router.push('/devWriting')
 

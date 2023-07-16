@@ -8,7 +8,7 @@ import styles from './page.module.scss'
 
 export default function DevWriting() {
 
-  let isManager :boolean = useSelector((state :object) => _.get(state, 'isManager') || false )
+  const isManager :boolean = useSelector((state :object) => _.get(state, 'isManager') || false )
 
   const [datas, setDatas] = useState([])
 

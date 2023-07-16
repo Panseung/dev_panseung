@@ -3,10 +3,10 @@ import _ from 'lodash'
 import moment from 'moment'
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-
-    const body = JSON.parse(req.body)
-
+  const body = JSON.parse(req.body)
+  const isManager = _.get(body, 'isManager')
+  
+  if (req.method === 'POST' && isManager ) {
     const writer = '승환'
     const title = _.get(body, 'title')
     const content = _.get(body, 'content')
