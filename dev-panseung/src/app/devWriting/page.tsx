@@ -26,6 +26,18 @@ export default function DevWriting() {
     }
   }
 
+  const deletData = async function( id: number ) {
+    try {
+      await fetch('/api/devWriting/delete', {
+        method: 'POST',
+        body: JSON.stringify({ id, isManager }),
+      })
+      window.location.reload()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className={styles['dev-writing-wrapper']}>
       <div className={styles['writing-header']}>
@@ -50,7 +62,10 @@ export default function DevWriting() {
             <div className={styles['item-title']}>{ _.get(data, 'title') }</div>
             <div className={styles['item-content']}>{ _.get(data, 'content') }</div>
             <div className={styles['item-time']}>{ _.get(data, 'created_time') }</div>
-            <div className={styles['item-time']}>{ _.get(data, 'modified_time') }</div>
+            <div className={styles['item-time']}>{ _.get(data, 'modified_time') }</div>       
+            {isManager && (
+              <button onClick={() => {deletData(_.get(data, 'id'))}}>글삭제</button>
+            )}
           </div>
           )
         } ) }

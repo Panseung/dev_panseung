@@ -35,7 +35,7 @@ export default function WritePage() {
         method: 'POST',
         body: JSON.stringify({ title, content, isManager }),
       })
-    router.push('/devWriting')
+      router.push('/devWriting')
 
 
     } catch (error) {
