@@ -13,6 +13,8 @@ type Data = {
   content: React.ReactNode
   created_time: string
   comment_count: number
+  field: string
+  matched_color: string
 }
 
 export default function DevWriting() {
@@ -47,7 +49,9 @@ export default function DevWriting() {
         })
       const created_time: string = moment(_.get(data, 'created_time')).format('YYYY-MM-DD') || '9999-99-99'
       const comment_count: number = _.get(data, 'comment_count') || 0
-      return { id, title, content: lineBreakedContent, created_time, comment_count }
+      const field: string = _.get(data, 'field') || 'etc'
+      const matched_color: string = _.get(fieldColor, field) || '#000000'
+      return { id, title, content: lineBreakedContent, created_time, comment_count, field, matched_color }
     } )
   }
 
@@ -74,6 +78,15 @@ export default function DevWriting() {
     router.push('/devWriting/write')
   }
 
+  const fieldColor = {
+    'JS': '#f7df1e',
+    'CSS': '#0c73b8',
+    'CS': '#808080',
+    'Front': '#66cdaa',
+    'Back': '#bc8f8f',
+    'etc': '#334900'
+  }
+
   useEffect(() => {
     fetchData()
   }, [fetchData])
@@ -98,7 +111,10 @@ export default function DevWriting() {
           return (
           <div className={styles['writing-item']} key={data.id}>
             <div className={styles['upper-area']}>
-              <div className={styles['item-title']}>{ data.title }</div>
+              <div className={styles['left-area']}>
+                <div className={styles['item-title']}>{ data.title }</div>
+                <div className={styles['item-field']} style={{ backgroundColor: data.matched_color }}>{ data.field }</div>
+              </div>
               {isManager && (
                 <button className={styles['delete-btn']} onClick={() => {showDeleteAlarm(data.id)}}>글삭제</button>
               )}
