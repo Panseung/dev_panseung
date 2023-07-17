@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Link from 'next/link'
 import _ from 'lodash'
 import styles from './page.module.scss'
+import { useRouter } from 'next/navigation'
 
 export default function DevWriting() {
 
@@ -26,6 +26,12 @@ export default function DevWriting() {
     }
   }
 
+  const showDeleteAlarm = function( id: number ) {
+    if (window.confirm('삭제하시겠습니까?')) {
+      deletData(id)
+    }
+  }
+
   const deletData = async function( id: number ) {
     try {
       await fetch('/api/devWriting/delete', {
@@ -36,6 +42,11 @@ export default function DevWriting() {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  const router = useRouter()
+  const pushWritePage = function () {
+    router.push('/devWriting/write')
   }
 
   return (
@@ -49,7 +60,7 @@ export default function DevWriting() {
         </div> 
         <div>
           {isManager && (
-            <Link href="/devWriting/write" > 글 작성 </Link>
+            <button className={styles['write-btn']} onClick={() => {pushWritePage()}}>글작성</button>
           )}
         </div>
       </div>
@@ -57,15 +68,14 @@ export default function DevWriting() {
         { datas.length > 0 && datas.map( function( data, i ) {  // 추후에 로대시 사용해서 변경
           return (
           <div className={styles['writing-item']} key={i}>
-            <div className={styles['item-title']}>{ _.get(data, 'id') }</div>
-            <div className={styles['item-title']}>{ _.get(data, 'writer') }</div>
-            <div className={styles['item-title']}>{ _.get(data, 'title') }</div>
+            <div className={styles['upper-area']}>
+              <div className={styles['item-title']}>{ _.get(data, 'title') }</div>
+              {isManager && (
+                <button className={styles['delete-btn']} onClick={() => {showDeleteAlarm(_.get(data, 'id'))}}>글삭제</button>
+              )}
+            </div>
             <div className={styles['item-content']}>{ _.get(data, 'content') }</div>
             <div className={styles['item-time']}>{ _.get(data, 'created_time') }</div>
-            <div className={styles['item-time']}>{ _.get(data, 'modified_time') }</div>       
-            {isManager && (
-              <button onClick={() => {deletData(_.get(data, 'id'))}}>글삭제</button>
-            )}
           </div>
           )
         } ) }

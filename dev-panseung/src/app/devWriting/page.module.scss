@@ -1,7 +1,10 @@
 .dev-writing-wrapper {
   .writing-header {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 80px;
-
+    gap: 10px;
+ 
     .title {
       font-size: 30px;
       font-weight: bolder;
@@ -11,6 +14,19 @@
     .content {
       font-size: 18px;
       color: #808080;
+    }
+
+    .write-btn {
+      width: 80px;
+      height: 40px;
+      padding: 4px 8px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #007bff;
+      color: #ffffff;
+      cursor: pointer;
     }
   }
 
@@ -27,8 +43,23 @@
       padding-bottom: 20px;
       border-bottom: 1px solid #e0e0e0;
       
-      .item-title {
-        font-size: 24px;
+      .upper-area {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 80px;
+        .item-title {
+          font-size: 24px;
+        }
+        .delete-btn {
+          height: 40px;
+          padding: 4px 8px;
+          border: none;
+          border-radius: 4px;
+          font-size: 14px;
+          font-weight: bold;
+          background-color: #ff3b3b;
+          color: #ffffff;
+          cursor: pointer;
+        }
       }
 
       .item-content {
