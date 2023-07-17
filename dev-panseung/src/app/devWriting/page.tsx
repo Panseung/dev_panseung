@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'
 import styles from './page.module.scss'
@@ -10,7 +10,7 @@ import moment from 'moment'
 type Data = {
   id: number
   title: string
-  content: string
+  content: React.ReactNode
   created_time: string
   comment_count: number
 }
@@ -37,9 +37,17 @@ export default function DevWriting() {
       const id: number = _.get(data, 'id') || 99999 + i
       const title: string = _.get(data, 'title') || '제목을 불러오지 못했습니다.'
       const content: string = _.get(data, 'content') || '글 내용을 불러오지 못했습니다.'
+      const lineBreakedContent = _.map(content.split('\n'), (line, i) => {
+        return (
+          <React.Fragment key={i}>
+            {line}
+            <br />
+          </React.Fragment>
+          )
+        })
       const created_time: string = moment(_.get(data, 'created_time')).format('YYYY-MM-DD') || '9999-99-99'
       const comment_count: number = _.get(data, 'comment_count') || 0
-      return { id, title, content, created_time, comment_count }
+      return { id, title, content: lineBreakedContent, created_time, comment_count }
     } )
   }
 
@@ -55,7 +63,7 @@ export default function DevWriting() {
         method: 'POST',
         body: JSON.stringify({ id, isManager }),
       })
-      window.location.reload()
+      setDatas(prevDatas => _.reject(prevDatas, { id }))
     } catch (error) {
       console.error(error)
     }
