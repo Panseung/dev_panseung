@@ -27,10 +27,10 @@ export default function Navbar() {
       </div>
       <div className={styles['navbar-right']}>
         <Link 
-          href="/timeArchive" 
+          href="/timeTracker" 
           prefetch={false}
-          className={cn(styles['link'], (router === '/timeArchive' ? styles['active'] : ''))}>
-          time archive
+          className={cn(styles['link'], (router === '/timeTracker' ? styles['active'] : ''))}>
+          time tracker
         </Link>
         <Link 
           href="/devWriting" 
