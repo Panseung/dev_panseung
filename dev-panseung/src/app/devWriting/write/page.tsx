@@ -10,13 +10,6 @@ export default function WritePage() {
   const isManager :boolean = useSelector((state :object) => _.get(state, 'isManager') || false )
   const router = useRouter()
 
-  useEffect(() => {
-    if (!isManager) {
-      alert('관리자만 작성할 수 있습니다.')
-      router.push('/devWriting')
-    }
-  }, [])
-
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
 
@@ -33,20 +26,42 @@ export default function WritePage() {
     try {
       await fetch('/api/devWriting/write', {
         method: 'POST',
-        body: JSON.stringify({ title, content, isManager }),
+        body: JSON.stringify({ title, content, category, isManager }),
       })
       router.push('/devWriting')
-
-
     } catch (error) {
       console.error(error)
     }
   }
 
+  const [category, setCategory] = useState<string>('')
+
+  const categoryOptions = ['-- 선택 --', 'CS', 'CSS', 'Front', 'Back', 'JS', 'etc']
+
+  const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setCategory(event.target.value);
+  }
+  useEffect(() => {
+    if (!isManager) {
+      alert('관리자만 작성할 수 있습니다.')
+      router.push('/devWriting')
+    }
+  }, [isManager, router])
+
   return (
     <div className={styles['writePage']}>
       <div className={styles['title']}>글 작성</div>
       <form onSubmit={handleSubmit} method="POST">
+      <div className={styles['formGroup']}>
+          <label htmlFor="category">카테고리</label>
+          <select id="category" value={category} onChange={handleCategoryChange}>
+            {categoryOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className={styles['formGroup']}>
           <label htmlFor="title">제목</label>
           <input type="text" id="title" value={title} onChange={handleTitleChange} />
