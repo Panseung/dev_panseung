@@ -87,6 +87,10 @@ export default function DevWriting() {
     'etc': '#334900'
   }
 
+  const handleTitleClick = (id: number) => {
+    router.push(`/devWriting/Detail?id=${id}`)
+  }
+
   useEffect(() => {
     fetchData()
   }, [fetchData])
@@ -112,7 +116,7 @@ export default function DevWriting() {
           <div className={styles['writing-item']} key={data.id}>
             <div className={styles['upper-area']}>
               <div className={styles['left-area']}>
-                <div className={styles['item-title']}>{ data.title }</div>
+                <div className={styles['item-title']} onClick={() => handleTitleClick(data.id)}>{ data.title }</div>
                 <div className={styles['item-category']} style={{ backgroundColor: data.matched_color }}>{ data.category }</div>
               </div>
               {isManager && (
