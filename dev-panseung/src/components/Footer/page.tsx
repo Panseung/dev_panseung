@@ -1,8 +1,16 @@
+// base code
 'use client'
-import { useState } from "react"
 import styles from "./page.module.scss"
 import classNames from "classnames"
+import _ from "lodash"
+
+// modules
+import { useState } from "react"
+
+//project files
 import Image from "next/image"
+
+//data type
 
 export default function Footer() {
   const cn = classNames.bind(styles)

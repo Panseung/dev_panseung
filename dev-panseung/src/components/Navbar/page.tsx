@@ -1,11 +1,18 @@
+// base code
 'use client'
+import styles from "./page.module.scss"
+import classNames from "classnames"
+import _ from "lodash"
+
+// modules
 import Link from 'next/link'
-import styles from './page.module.scss'
 import { usePathname } from 'next/navigation'
-import classNames from 'classnames'
 import { signIn, signOut } from 'next-auth/react'
 import { useSelector } from 'react-redux'
-import _ from 'lodash'
+
+//project files
+
+//data type
 
 export default function Navbar() {
   

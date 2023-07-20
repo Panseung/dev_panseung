@@ -1,12 +1,18 @@
+// base code
 'use client'
+import styles from "./page.module.scss"
+import classNames from "classnames"
+import _ from "lodash"
 
+// modules
 import React, { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import moment from 'moment'
-import _ from 'lodash'
-import styles from './page.module.scss'
 import { useSelector } from 'react-redux'
 
+//project files
+
+//data type
 type Data = {
   id: number
   title: string

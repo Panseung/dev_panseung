@@ -1,4 +1,14 @@
-import styles from './page.module.scss'
+// base code
+'use client'
+import styles from "./page.module.scss"
+import classNames from "classnames"
+import _ from "lodash"
+
+// modules
+
+//project files
+
+//data type
 
 export default function AlgoStudy() {
   return (

@@ -1,10 +1,17 @@
+// base code
 'use client'
+import styles from "./page.module.scss"
+import classNames from "classnames"
+import _ from "lodash"
 
+// modules
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import styles from './page.module.scss'
 import { useSelector } from 'react-redux'
-import _ from 'lodash'
+
+//project files
+
+//data type
 
 export default function WritePage() {
   const isManager :boolean = useSelector((state :object) => _.get(state, 'isManager') || false )

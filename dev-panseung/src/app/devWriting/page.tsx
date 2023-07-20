@@ -1,12 +1,18 @@
+// base code
 'use client'
+import styles from "./page.module.scss"
+import classNames from "classnames"
+import _, { reverse } from 'lodash'
 
+// modules
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import _, { reverse } from 'lodash'
-import styles from './page.module.scss'
 import { useRouter } from 'next/navigation'
 import moment from 'moment'
 
+//project files
+
+//data type
 type Data = {
   id: number
   title: string
