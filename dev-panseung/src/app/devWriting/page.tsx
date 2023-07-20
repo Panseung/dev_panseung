@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import _ from 'lodash'
+import _, { reverse } from 'lodash'
 import styles from './page.module.scss'
 import { useRouter } from 'next/navigation'
 import moment from 'moment'
@@ -27,14 +27,14 @@ export default function DevWriting() {
     try {
       const response = await fetch('/api/devWriting/getWritings')
       const result = await response.json()
-      const parsedData = dataParse(result)
+      const parsedData = dataParse(reverse(result))
       setDatas(parsedData)
     } catch (error) {
       console.error(error)
     }
   }, [])
 
-  const dataParse = function(rowDatas: object) {
+  const dataParse = function(rowDatas: object[]) {
     return _.map( rowDatas, (data, i) => {
       const id: number = _.get(data, 'id') || 99999 + i
       const title: string = _.get(data, 'title') || '제목을 불러오지 못했습니다.'
