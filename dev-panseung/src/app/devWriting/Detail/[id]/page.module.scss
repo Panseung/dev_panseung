@@ -1,0 +1,55 @@
+.writing-item {
+  display: grid;
+  grid-template-rows: 50px 20px minmax(0, 1fr);
+  gap: 20px;
+
+  height: 200px;
+  padding-bottom: 20px;
+  
+  .upper-area {
+    display: flex;
+    justify-content: space-between;
+
+    .left-area {
+      display: flex;
+      gap: 20px;
+      
+      .item-title {
+        font-size: 24px;
+      }
+
+      .item-category {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 40px;
+        font-size: 20px;
+        color: #ffffff;
+        border-radius: 5px;
+      }
+    }
+    .delete-btn {
+      height: 40px;
+      padding: 4px 8px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #ff3b3b;
+      color: #ffffff;
+      cursor: pointer;
+    }
+  }
+
+  .item-time {
+    font-size: 16px;
+    color: #808080;
+  }
+
+  .item-content {
+    padding: 20px 0;
+    line-height: 1.6em;
+  }
+
+}
