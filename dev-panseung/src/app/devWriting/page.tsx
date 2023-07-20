@@ -88,7 +88,7 @@ export default function DevWriting() {
   }
 
   const handleTitleClick = (id: number) => {
-    router.push(`/devWriting/Detail?id=${id}`)
+    router.push(`/devWriting/Detail/${id}`)
   }
 
   useEffect(() => {

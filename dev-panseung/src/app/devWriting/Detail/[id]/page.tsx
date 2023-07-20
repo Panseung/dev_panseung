@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import moment from 'moment'
+import _ from 'lodash'
 
 type Data = {
   id: number
@@ -14,9 +15,10 @@ type Data = {
   matched_color: string
 }
 
-const Detail = () => {
-  const router = useRouter()
-  const { id } = router.query
+export default function Detail() {
+  const pathname = usePathname()
+  const pathnameList = pathname?.split('/')
+  const id = Number(_.last(pathnameList))
 
   const [data, setData] = useState<Data | null>(null)
 
@@ -26,15 +28,16 @@ const Detail = () => {
     }
   }, [id])
 
-  const fetchData = async (id: string | string[]) => {
+  const fetchData = async (id: number) => {
     try {
-      const response = await fetch(`/api/devWriting/getWriting/${id}`)
+      const response = await fetch(`/api/devWriting/getWritingById?id=${id}`)
       const result = await response.json()
-      setData(result)
+      setData(result[0])
     } catch (error) {
       console.error(error)
     }
   }
+  
 
   if (!data) {
     return <div>Loading...</div>
@@ -49,4 +52,4 @@ const Detail = () => {
   )
 }
 
-export default Detail
+
