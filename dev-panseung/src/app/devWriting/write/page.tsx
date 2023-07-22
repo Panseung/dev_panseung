@@ -29,11 +29,20 @@ export default function WritePage() {
   }
   
   const handleSubmit = async function(event: FormEvent<HTMLFormElement>) {
+
+    if ( category == '' ) {
+      return alert('카테고리를 선택해주세요.')
+    } else if ( title == '' ) {
+      return alert('제목을 입력해주세요.')
+    } else if ( content == '' ) {
+      return alert('글 내용을 입력해주세요.')
+    }
+
     event.preventDefault()
     try {
       await fetch('/api/devWriting/write', {
         method: 'POST',
-        body: JSON.stringify({ title, content, category, isManager }),
+        body: JSON.stringify({ category, title, content, isManager }),
       })
       router.push('/devWriting')
     } catch (error) {
@@ -46,8 +55,9 @@ export default function WritePage() {
   const categoryOptions = ['-- 선택 --', 'CS', 'CSS', 'Front', 'Back', 'JS', 'etc']
 
   const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setCategory(event.target.value);
+    setCategory(event.target.value)
   }
+  
   useEffect(() => {
     if (!isManager) {
       alert('관리자만 작성할 수 있습니다.')
