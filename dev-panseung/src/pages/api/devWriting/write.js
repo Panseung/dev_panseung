@@ -8,6 +8,7 @@ export default async function handler(req, res) {
   
   if (req.method === 'POST' && isManager ) {
     const writer = '승환'
+    const category = _.get(body, 'category')
     const title = _.get(body, 'title')
     const content = _.get(body, 'content')
     const created_time = moment().format('YYYY-MM-DD HH:mm:ss')
@@ -18,10 +19,10 @@ export default async function handler(req, res) {
     try {
       // 쿼리문 실행
       const query = `
-        INSERT INTO \`dev-Panseung\`.dev_writing (writer, title, content, created_time, modified_time, comment_count, is_deleted)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO \`dev-Panseung\`.dev_writing (writer, category, title, content, created_time, modified_time, comment_count, is_deleted)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       `
-      dbConnection.execute(query, [writer, title, content, created_time, modified_time, comment_count, is_deleted])
+      dbConnection.execute(query, [writer, category, title, content, created_time, modified_time, comment_count, is_deleted])
       // 응답
       return res.status(200).json({ message: '데이터 입력 성공' })
     } catch (error) {
