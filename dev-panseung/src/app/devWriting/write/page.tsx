@@ -50,9 +50,9 @@ export default function WritePage() {
     }
   }
 
-  const [category, setCategory] = useState<string>('')
+  const [category, setCategory] = useState<string>('CS')
 
-  const categoryOptions = ['-- 선택 --', 'CS', 'CSS', 'Front', 'Back', 'JS', 'etc']
+  const categoryOptions = ['CS', 'CSS', 'Front', 'Back', 'JS', 'etc']
 
   const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value)

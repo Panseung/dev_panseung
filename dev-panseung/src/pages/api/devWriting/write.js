@@ -16,6 +16,11 @@ export default async function handler(req, res) {
     const comment_count = 0
     const is_deleted = 0
 
+    // 빈 문자열인지 확인하는 부분 추가
+    if (category.trim() === '' || title.trim() === '' || content.trim() === '') {
+      return res.status(400).json({ message: '제목과 내용은 필수 입력 항목입니다.' })
+    }
+
     try {
       // 쿼리문 실행
       const query = `
