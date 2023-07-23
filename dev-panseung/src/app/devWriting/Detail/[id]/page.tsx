@@ -24,6 +24,8 @@ type Data = {
 }
 
 export default function Detail() {
+  const cn = classNames.bind(styles)
+
   const pathname = usePathname()
   const pathnameList = pathname?.split('/')
   const id = Number(_.last(pathnameList))
@@ -111,7 +113,10 @@ export default function Detail() {
           <div className={styles['item-category']} style={{ backgroundColor: data.matched_color }}>{ data.category }</div>
         </div>
         {isManager && (
-          <button className={styles['delete-btn']} onClick={() => {showDeleteAlarm(data.id)}}>글삭제</button>
+          <div className={styles['right-area']}>
+            <button className={cn(styles['btn'], styles['update'])} onClick={() => {}}>글수정</button>
+            <button className={cn(styles['btn'], styles['delete'])} onClick={() => {showDeleteAlarm(data.id)}}>글삭제</button>
+          </div>
         )}
       </div>
       <div className={styles['item-time']}>{ data.time }</div>
